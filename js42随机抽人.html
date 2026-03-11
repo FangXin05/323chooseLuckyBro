@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>随机抽人</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        align-items: center;
+        background: url("./90d563643c14e620027ccc4d028c5944_Resize\ Image.jpg")
+          no-repeat center/cover;
+      }
+      .box {
+        width: 800px;
+        height: 400px;
+        background-color: rgba(207, 205, 205, 0.532);
+        text-align: center;
+        border-radius: 50px;
+      }
+      h2 {
+        font-size: 60px;
+        margin: 0;
+      }
+      button {
+        padding: 15px 30px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        background-color: rgba(184, 184, 184, 0.778);
+      }
+      .start {
+        margin-right: 50px;
+      }
+
+      .luckBro {
+        font-size: 35px;
+      }
+      .box2 {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>꧁༺随机抽取倒霉蛋!༻꧂</h2>
+      <div class="luckBro">꧁༺最luck的是哪位哥哥༻꧂</div>
+      <div class="box2">꧁༺当前剩余哥哥数量为：6༻꧂</div>
+      <div class="btns">
+        <button class="start">开始</button>
+        <button class="over">结束</button>
+      </div>
+    </div>
+    <script>
+      const startBtn = document.querySelector(".start");
+      const overBtn = document.querySelector(".over");
+      const mainText = document.querySelector(".luckBro");
+      const mainText2 = document.querySelector(".box2");
+      const bro = ["黄家浩", "房鑫", "李远", "郭庆腾", "王梓炎", "王董程"];
+      let timeId = null;
+      let re = null;
+      function getRandom() {
+        return parseInt(Math.random() * bro.length);
+      }
+      startBtn.addEventListener("click", function starBtn() {
+        timeId = setInterval(function () {
+          re = getRandom();
+          mainText.innerHTML = bro[re];
+        }, 35);
+      });
+      overBtn.addEventListener("click", function overBtn() {
+        clearInterval(timeId);
+        bro.splice(re, 1);
+        mainText2.innerHTML = `꧁༺当前剩余哥哥数量为：${bro.length}༻꧂`;
+        if (bro.length === 1) {
+          startBtn.disabled = true;
+          overBtn.disabled = true;
+          alert("没有可选的哥哥了~");
+        }
+      });
+    </script>
+  </body>
+</html>
